@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+    <h2>Test App</h2>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/signin">Log off</a>
+    <a href="/users/edit">Profile</a>
+    <h2>{{user.first_name}} {{user.last_name}}</h2>
+    <p>
+      Registered at: {{user.created_at}}
+    </p>
+    <p>
+      User ID: {{user.id}}
+    </p>
+    <p>
+      Email address: {{user.email}}
+    </p>
+    <p>
+      Description: {{user.description}}
+    </p>
+    <h2>Leave a message for {{user.first_name}}</h2>
+    <form action="/submitmessage" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="userid" value="{{user.id}}">
+      <input type="text" name="message" value="">
+      <input type="submit" value="Post">
+    </form>
+    {% for m in messages %}
+      <h3><a href="/users/show/{{m.visitor_id.id}}">{{m.visitor_id.first_name}} {{m.visitor_id.last_name}}</a> wrote {{m.created_at}}</h3>
+      <p>
+        {{m.content}}
+      </p>
+      {% for c in m.messagecomment.all %}
+        <h3><a href="/users/show/{{c.user_id.id}}">{{c.user_id.first_name}} {{c.user_id.last_name}}</a> wrote {{c.created_at}}</h3>
+        <p>
+          {{c.content}}
+        </p>
+      {% endfor %}
+        <form class="" action="/postcomment" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="user_id" value="{{user.id}}">
+          <input type="hidden" name="message_id" value="{{m.id}}">
+          <input type="text" name="content" value="write a message">
+          <input type="submit" value="Post">
+        </form>
+    {% endfor %}
+  </body>
+</html>

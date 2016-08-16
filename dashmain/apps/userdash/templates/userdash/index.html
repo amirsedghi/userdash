@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+    <div class="header">
+      Test App
+      <a href="/">Home</a>
+      <a href="/signin">Signin</a>
+    </div>
+    <div class="welcome">
+      <h1>Welcome to the Test</h1>
+      <p>
+        We're going to built a cool application using an MVC framework! This application was built with the Village88 folks!
+      </p>
+      <form class="" action="/signin" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Start">
+      </form>
+    </div>
+    <div class="bottom">
+      <div class="">
+        <h2>Manage Users</h2>
+        <p>
+          Using the application, you'll learn how to add, remove, and edit users for the application
+        </p>
+      </div>
+      <div class="">
+        <h2>Leave messages</h2>
+        <p>
+          Users will be able to leave a message to another user using this application
+        </p>
+      </div>
+      <div class="">
+        <h2>Edit User Information</h2>
+        <p>
+          Admins will be able to edit another user's information (email address, first name, last name, etc.)
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
